@@ -1,5 +1,5 @@
 function sendReply(data){
-  const endPoint = "https://api.telegram.org/bot1881370155:AAEx5QW5uWDB0l5EYwKBafiWKra8ypMe0a0/sendMessage";
+  const endPoint = "https://api.telegram.org/bot<Bot_token>/sendMessage";
   const options = {
     method : "post",
     contentType: 'application/json',
@@ -12,7 +12,7 @@ function sendChatAction(chatId){
     chat_id:chatId,
     action:'typing'
   };
-  const endPoint = "https://api.telegram.org/bot1881370155:AAEx5QW5uWDB0l5EYwKBafiWKra8ypMe0a0/sendChatAction";
+  const endPoint = "https://api.telegram.org/bot<Bot_token>/sendChatAction";
   const options = {
     method : "post",
     contentType: 'application/json',
@@ -22,7 +22,7 @@ function sendChatAction(chatId){
 }
 function getData(city){
   try{
-  let response = UrlFetchApp.fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8180425d85c0fd6ebda3448b41d54c6c&units=metric`,{muteHttpExceptions: true,}).getContentText();
+  let response = UrlFetchApp.fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=<Openweather_api_key>&units=metric`,{muteHttpExceptions: true,}).getContentText();
   let data = JSON.parse(response);
   let weatherData = `*${city}*\n*Longitute : * ${data.coord.lon}'\n*Latitude : *${data.coord.lat}'\n*Weather : *${data.weather[0].description}\n*Temperature Felt : *${data.main.feels_like}'C\n*Minimum Temprature : *${data.main.temp_min}'C\n*Maximum Temprature : *${data.main.temp_max}'C'\n*Humidity : *${data.main.humidity}%\n*Wind Speed : *${data.wind.speed} meter/sec`;
   return weatherData;
