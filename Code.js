@@ -21,11 +21,21 @@ function sendChatAction(chatId){
   const response = UrlFetchApp.fetch(endPoint,options);
 }
 function getData(city){
-  let response = UrlFetchApp.fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8180425d85c0fd6ebda3448b41d54c6c`);
-  return JSON.stringify(response);
+  city = "calicut"
+  let response = UrlFetchApp.fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8180425d85c0fd6ebda3448b41d54c6c&units=metric`).getContentText();
+  let data = JSON.parse(response);
+  let weatherData = `*${city}*\n
+  *Longitute : * ${data.coord.lon}'\n
+  *Latitude : *${data.coord.lat}'\n
+  *Weather : *${data.weather[0].description}\n
+  *Temperature Felt : *${data.main.feels_like}'C
+  *Minimum Temprature : *${data.main.temp_min}'C,
+  *Maximum Temprature : *${data.main.temp_max}'C',
+  *Humidity : *${data.main.humidity}%,
+  *Wind Speed : *${data.wind.speed} meter/sec`;
+  Logger.log(weatherData);
+  return weatherData;
 }
-
-
 
 function doPost(e){
   const update = JSON.parse(e.postData.contents);
@@ -42,10 +52,10 @@ function doPost(e){
     };
   }
   else{
-    let text = getData(messageText);
+    let weatherData = getData(messageText);
     sendChatAction(chatId);
     data = {
-      text : text,
+      text : weatherData,
       parse_mode : "markdown",
       chat_id : chatId,
     };
