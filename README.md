@@ -1,5 +1,5 @@
 # Weather bot
-Bot that tell your about the current weather. Built using google app script.
+Bot that tells your about the current weather. Built using google app script.
 
 ### Screenshots
 ![Start](https://github.com/joseph-benoy/weather-bot/blob/main/screenshots/1.jpg)
