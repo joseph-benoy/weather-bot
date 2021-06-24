@@ -24,15 +24,7 @@ function getData(city){
   try{
   let response = UrlFetchApp.fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8180425d85c0fd6ebda3448b41d54c6c&units=metric`,{muteHttpExceptions: true,}).getContentText();
   let data = JSON.parse(response);
-  let weatherData = `*${city}*\n
-  *Longitute : * ${data.coord.lon}'\n
-  *Latitude : *${data.coord.lat}'\n
-  *Weather : *${data.weather[0].description}\n
-  *Temperature Felt : *${data.main.feels_like}'C
-  *Minimum Temprature : *${data.main.temp_min}'C,
-  *Maximum Temprature : *${data.main.temp_max}'C',
-  *Humidity : *${data.main.humidity}%,
-  *Wind Speed : *${data.wind.speed} meter/sec`;
+  let weatherData = `*${city}*\n*Longitute : * ${data.coord.lon}'\n*Latitude : *${data.coord.lat}'\n*Weather : *${data.weather[0].description}\n*Temperature Felt : *${data.main.feels_like}'C\n*Minimum Temprature : *${data.main.temp_min}'C\n*Maximum Temprature : *${data.main.temp_max}'C'\n*Humidity : *${data.main.humidity}%\n*Wind Speed : *${data.wind.speed} meter/sec`;
   return weatherData;
   }
   catch(err){
