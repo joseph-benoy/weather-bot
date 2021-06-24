@@ -21,8 +21,9 @@ function sendChatAction(chatId){
   const response = UrlFetchApp.fetch(endPoint,options);
 }
 function getData(city){
-  city = "calicut"
-  let response = UrlFetchApp.fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8180425d85c0fd6ebda3448b41d54c6c&units=metric`).getContentText();
+  city = "aaa"
+  try{
+  let response = UrlFetchApp.fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8180425d85c0fd6ebda3448b41d54c6c&units=metric`,{muteHttpExceptions: true,}).getContentText();
   let data = JSON.parse(response);
   let weatherData = `*${city}*\n
   *Longitute : * ${data.coord.lon}'\n
@@ -35,6 +36,10 @@ function getData(city){
   *Wind Speed : *${data.wind.speed} meter/sec`;
   Logger.log(weatherData);
   return weatherData;
+  }
+  catch(err){
+    return "*City not found!*\nPlease try another one."
+  }
 }
 
 function doPost(e){
