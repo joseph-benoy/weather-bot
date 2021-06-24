@@ -20,6 +20,13 @@ function sendChatAction(chatId){
   };
   const response = UrlFetchApp.fetch(endPoint,options);
 }
+function getData(city){
+  let response = UrlFetchApp.fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=8180425d85c0fd6ebda3448b41d54c6c`);
+  return JSON.stringify(response);
+}
+
+
+
 function doPost(e){
   const update = JSON.parse(e.postData.contents);
   const messageText = update.message.text;
@@ -28,16 +35,19 @@ function doPost(e){
   let data = {};
   if(messageText=="/start"){
         sendChatAction(chatId);
-        let btnMarkup = {
-          resize_keyboard: true,
-          one_time_keyboard: true,
-          keyboard: [['Get updates'],['Stop updates']]
-        };
         data = {
-        text : `*Hello ${fullName}!*\nWe will update you with latest news around the globe in *Malayalam*`,
+        text : `*Hello ${fullName}!*\nSend us the name of your city and we will let you know about the weather there!`,
         parse_mode : "markdown",
         chat_id : chatId,
-        reply_markup : btnMarkup
+    };
+  }
+  else{
+    let text = getData(messageText);
+    sendChatAction(chatId);
+    data = {
+      text : text,
+      parse_mode : "markdown",
+      chat_id : chatId,
     };
   }
   sendReply(data);
