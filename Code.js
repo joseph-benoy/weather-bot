@@ -1,5 +1,5 @@
 function sendReply(data){
-  const endPoint = "https://api.telegram.org/bot<bot_token>/sendMessage";
+  const endPoint = "https://api.telegram.org/bot1881370155:AAEx5QW5uWDB0l5EYwKBafiWKra8ypMe0a0/sendMessage";
   const options = {
     method : "post",
     contentType: 'application/json',
@@ -12,7 +12,7 @@ function sendChatAction(chatId){
     chat_id:chatId,
     action:'typing'
   };
-  const endPoint = "https://api.telegram.org/bot<bot_token>/sendChatAction";
+  const endPoint = "https://api.telegram.org/bot1881370155:AAEx5QW5uWDB0l5EYwKBafiWKra8ypMe0a0/sendChatAction";
   const options = {
     method : "post",
     contentType: 'application/json',
@@ -40,4 +40,5 @@ function doPost(e){
         reply_markup : btnMarkup
     };
   }
+  sendReply(data);
 }
